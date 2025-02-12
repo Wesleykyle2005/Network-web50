@@ -1,0 +1,104 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+<div class="row w-100 my-2 mx-5">
+    <div class="card">
+        <div class="card-header">
+            <h5>Posts</h5>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                {% for post in posts %}
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col text-start">
+                                <strong>
+                                    <a href="{% url 'viewprofile' post.user.id %}">{{ post.user.username }}</a>
+                                </strong>
+                            </div>
+                            <div class="col text-end">
+                                <p>{{ post.timestamp }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-start">
+                                <p id="post-content-{{ post.id }}">{{ post.content }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-end">
+                                <button type="button" class="like_btn btn btn-outline-danger btn-sm position-relative{% if post.liked %} liked{% endif %}" value="{{ post.id }}">
+                                    <i class="fa-solid fa-heart"></i> Like
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ post.likes|length }}
+                                        <span class="visually-hidden">likes</span>
+                                    </span>
+                                </button>
+                                {% if post.user.id == current_user.id %}
+                                    <button 
+                                        type="button" 
+                                        class="btn btn-outline-dark btn-sm position-relative edit-btn mx-1" 
+                                        data-post-id="{{ post.id }}"
+                                        data-post-content="{{ post.content|escapejs }}"
+                                    >
+                                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                                    </button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            
+            <!-- Controles de paginación -->
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center mt-3">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                        </li>
+                    {% endif %}
+                    
+                    {% for num in page_obj.paginator.page_range %}
+                        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endfor %}
+                    
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Edit Post -->
+<div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editPostModalLabel">Edit Post</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{% url 'edit_post' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="post_id" id="edit-post-id">
+                    <div class="mb-3">
+                        <label for="edit-post-content" class="form-label">Content</label>
+                        <textarea class="form-control" id="edit-post-content" name="content" rows="5" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

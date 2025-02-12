@@ -1,0 +1,40 @@
+.container-avatar{
+    display:block;
+    border-radius: 50%;	
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    font-weight: 400;
+    font-size: 100px;
+    background-color: rgb(160, 160, 160);
+    
+    align-content: center;
+}
+
+.hr-custom {
+    border: 0;
+    height: 5px;
+    background-color: #000;
+    width: 100%; 
+}
+
+.btn-post {
+    background-color: #72af5c;
+    color: rgb(29, 96, 203);
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 24px; /* Ajusta el tamaño de la fuente según sea necesario */
+    width: 60px; /* Ajusta el ancho del botón */
+    height: 60px; /* Ajusta la altura del botón */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.like_btn:hover,
+.like_btn.liked {
+  background-color: #dc3545; 
+  color: white;             
+}
