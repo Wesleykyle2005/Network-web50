@@ -52,6 +52,13 @@
             {% block body %}
             {% endblock %}
         </div>
+        
+        <!-- CSRF Token para JavaScript -->
+        {% csrf_token %}
+        <script>
+            // Hacer el CSRF token disponible globalmente
+            window.csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        </script>
         <script src="{% static 'network/script.js' %}"></script>
     </body>
 </html>

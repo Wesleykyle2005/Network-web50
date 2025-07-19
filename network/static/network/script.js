@@ -1,45 +1,77 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Función para obtener el CSRF token
+    function getCSRFToken() {
+        return window.csrfToken || '';
+    }
+
+    // Función para mostrar mensajes de error
+    function showError(message) {
+        console.error('Error:', message);
+        alert('Error: ' + message);
+    }
+
     const followBtn = document.getElementById('follow_btn');
     if (followBtn) {
         followBtn.addEventListener('click', function() {
             let userId = this.value;
-            
             fetch(`/follow/${userId}`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCSRFToken()
                 },
                 body: JSON.stringify({ user_id: userId })
             })
-            .then(response => response.json())
-            .then(result => {
-                followBtn.innerHTML = result.following ? 'Unfollow' : 'Follow';
-                document.getElementById('followers_count').innerHTML = result.followers_count;
-                document.getElementById('following_count').innerHTML = result.following_count;
-                
-                let followersHTML = '<ul>';
-                if (result.followers_this && result.followers_this.length > 0) {
-                    result.followers_this.forEach(function(follower) {
-                        followersHTML += `<li><a href="/viewprofile/${follower.id}">${follower.username}</a></li>`;
-                    });
-                } else {
-                    followersHTML += '<li>No followers yet.</li>';
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                followersHTML += '</ul>';
-                document.getElementById('FollowersModalBody').innerHTML = followersHTML;
-                
-                let followingHTML = '<ul>';
-                if (result.following_this && result.following_this.length > 0) {
-                    result.following_this.forEach(function(followingUser) {
-                        followingHTML += `<li><a href="/viewprofile/${followingUser.id}">${followingUser.username}</a></li>`;
-                    });
-                } else {
-                    followingHTML += '<li>Not following anyone.</li>';
-                }
-                followingHTML += '</ul>';
-                document.getElementById('followingModalBody').innerHTML = followingHTML;
+                return response.json();
             })
-            .catch(error => console.log(error));
+            .then(result => {
+                if (result.error) {
+                    showError(result.error);
+                    return;
+                }
+                followBtn.innerHTML = result.following ? 'Unfollow' : 'Follow';
+                const followersCountElement = document.getElementById('followers_count');
+                const followingCountElement = document.getElementById('following_count');
+                if (followersCountElement) {
+                    followersCountElement.innerHTML = result.followers_count;
+                }
+                if (followingCountElement) {
+                    followingCountElement.innerHTML = result.following_count;
+                }
+                const followersModalBody = document.getElementById('FollowersModalBody');
+                if (followersModalBody && result.followers_this) {
+                    let followersHTML = '<ul>';
+                    if (result.followers_this.length > 0) {
+                        result.followers_this.forEach(function(follower) {
+                            followersHTML += `<li><a href="/viewprofile/${follower.id}">${follower.username}</a></li>`;
+                        });
+                    } else {
+                        followersHTML += '<li>No followers yet.</li>';
+                    }
+                    followersHTML += '</ul>';
+                    followersModalBody.innerHTML = followersHTML;
+                }
+                const followingModalBody = document.getElementById('followingModalBody');
+                if (followingModalBody && result.following_this) {
+                    let followingHTML = '<ul>';
+                    if (result.following_this.length > 0) {
+                        result.following_this.forEach(function(followingUser) {
+                            followingHTML += `<li><a href="/viewprofile/${followingUser.id}">${followingUser.username}</a></li>`;
+                        });
+                    } else {
+                        followingHTML += '<li>Not following anyone.</li>';
+                    }
+                    followingHTML += '</ul>';
+                    followingModalBody.innerHTML = followingHTML;
+                }
+            })
+            .catch(error => {
+                showError('Error al procesar la solicitud de follow');
+            });
         });
     }
     
@@ -49,24 +81,35 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(`/like/${postId}`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCSRFToken()
                 },
                 body: JSON.stringify({ post_id: postId })
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(result => {
+                if (result.error) {
+                    showError(result.error);
+                    return;
+                }
                 const badge = this.querySelector('.badge');
                 if (badge) {
                     badge.innerText = result.likes_count;
                 }
-
                 if (result.liked) {
                     this.classList.add('liked');
                 } else {
                     this.classList.remove('liked');
                 }
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                showError('Error al procesar el like');
+            });
         });
     });
 
@@ -83,10 +126,8 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 postContent = JSON.parse('"' + this.dataset.postContent + '"');
             } catch(e) {
-                console.log("Error al parsear el contenido del post:", e);
                 postContent = this.dataset.postContent || "";
             }
-            
             if (editModalElement) {
                 const editPostIdInput = document.getElementById('edit-post-id');
                 const editPostContentInput = document.getElementById('edit-post-content');
@@ -97,8 +138,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (editModal) {
                     editModal.show();
                 }
-            } else {
-                console.log("El elemento del modal de edición no existe.");
             }
         });
     });
@@ -119,18 +158,15 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 if (data.success) {
                     const contentElement = document.getElementById(`post-content-${data.post_id}`);
-                    console.log(contentElement);
                     if (contentElement) {
                         contentElement.innerText = data.new_content;
                     }
                     if (editModal) {
                         editModal.hide();
                     }
-                } else {
-                    console.error("Error al editar el post:", data.error);
                 }
             })
-            .catch(error => console.error("Error en la petición:", error));
+            .catch(error => {});
         });
     }
 });

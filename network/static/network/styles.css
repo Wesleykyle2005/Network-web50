@@ -1,40 +1,170 @@
-.container-avatar{
-    display:block;
-    border-radius: 50%;	
-    width: 150px;
-    height: 150px;
+:root {
+    --color-bg: #181a2a;
+    --color-panel: #23243a;
+    --color-primary: #3a8cff;
+    --color-accent: #00e0ff;
+    --color-danger: #ff0059;
+    --color-text: #f8fafd;
+    --color-muted: #7a7e8a;
+    --color-border: #23243a;
+}
+
+body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'JetBrains Mono', 'Fira Mono', 'Menlo', 'Consolas', monospace;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.card, .modal-content {
+    background: var(--color-panel) !important;
+    color: var(--color-text) !important;
+    border: 1.5px solid var(--color-border) !important;
+    border-radius: 6px !important;
+    padding: 1.5rem;
+    box-shadow: none !important;
+}
+
+.list-group-item {
+    background: var(--color-panel) !important;
+    color: var(--color-text) !important;
+    border: none !important;
+    border-bottom: 1px solid var(--color-border) !important;
+    font-weight: 500;
+    box-sizing: border-box;
+    width: 100% !important;
+    margin: 0 !important;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    transition: background 0.3s, color 0.3s, border 0.3s;
+}
+
+.card-header {
+    background: transparent;
+    color: var(--color-primary);
+    border-bottom: 1px solid var(--color-border);
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding-bottom: 0.5rem;
+}
+
+.btn, .btn-primary, .btn-secondary {
+    background: none !important;
+    color: var(--color-primary) !important;
+    border: 2px solid var(--color-primary) !important;
+    border-radius: 6px !important;
+    font-weight: 600;
+    padding: 0.5em 1.5em;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    box-shadow: none !important;
+}
+.btn:hover, .btn:focus, .btn-primary:hover, .btn-primary:focus, .btn-secondary:hover, .btn-secondary:focus {
+    background: var(--color-primary) !important;
+    color: #fff !important;
+    border-color: var(--color-accent) !important;
+}
+
+.like_btn {
+    border: 2px solid var(--color-accent) !important;
+    color: var(--color-accent) !important;
+    background: none !important;
+    font-weight: 700;
+    border-radius: 6px !important;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.like_btn:hover, .like_btn.liked, .like_btn.liked:hover {
+    background: var(--color-accent) !important;
+    color: #181a2a !important;
+    border-color: var(--color-primary) !important;
+}
+.like_btn.liked i, .like_btn:hover i {
+    color: #181a2a !important;
+}
+
+.profile-link {
+    color: var(--color-primary);
+    border-bottom: 1.5px dotted var(--color-accent);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s, border 0.2s;
+}
+.profile-link:hover, .profile-link:focus {
+    color: var(--color-accent);
+    border-bottom: 1.5px solid var(--color-accent);
+}
+
+.pagination .page-link {
+    background: none !important;
+    color: var(--color-primary) !important;
+    border: 1.5px solid var(--color-border) !important;
+    border-radius: 4px !important;
+    font-weight: 600;
+    margin: 0 2px;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    box-shadow: none !important;
+}
+.pagination .active .page-link,
+.pagination .page-link:hover,
+.pagination .page-link:focus {
+    background: var(--color-primary) !important;
+    color: #fff !important;
+    border-color: var(--color-accent) !important;
+}
+
+.container-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50% !important;
     margin: 0 auto;
-    font-weight: 400;
-    font-size: 100px;
-    background-color: rgb(160, 160, 160);
-    
-    align-content: center;
+    font-weight: 700;
+    font-size: 70px;
+    background: var(--color-panel);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border: 2.5px solid var(--color-accent);
+    transition: background 0.3s, color 0.3s, border 0.3s;
+    overflow: hidden;
 }
 
 .hr-custom {
     border: 0;
-    height: 5px;
-    background-color: #000;
-    width: 100%; 
+    height: 2px;
+    background-color: var(--color-border);
+    width: 100%;
+    transition: background 0.3s;
 }
 
 .btn-post {
-    background-color: #72af5c;
-    color: rgb(29, 96, 203);
-    border: none;
-    cursor: pointer;
-    border-radius: 50%;
-    font-size: 24px; /* Ajusta el tamaño de la fuente según sea necesario */
-    width: 60px; /* Ajusta el ancho del botón */
-    height: 60px; /* Ajusta la altura del botón */
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1050;
+    background: var(--color-accent) !important;
+    color: #181a2a !important;
+    border: 2.5px solid var(--color-primary) !important;
+    border-radius: 50% !important;
+    width: 60px;
+    height: 60px;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    box-shadow: none !important;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    cursor: pointer;
+}
+.btn-post:hover, .btn-post:focus {
+    background: var(--color-primary) !important;
+    color: #fff !important;
+    border-color: var(--color-accent) !important;
 }
 
 
-.like_btn:hover,
-.like_btn.liked {
-  background-color: #dc3545; 
-  color: white;             
-}
+@import url('https://fonts.cdnfonts.com/css/jetbrains-mono');

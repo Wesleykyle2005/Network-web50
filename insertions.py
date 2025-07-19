@@ -1,3 +1,6 @@
+"""Insertions script for testing in Network."""
+
+# pylint: disable=no-member
 import os
 import sys
 
@@ -7,9 +10,10 @@ if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
 # Configurar la variable de entorno DJANGO_SETTINGS_MODULE ANTES de importar módulos de Django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project4.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project4.settings")
 
 import django
+
 django.setup()
 
 import random
@@ -17,15 +21,15 @@ import random
 from network.models import Post, User
 
 # Crear superusuario
-if not User.objects.filter(username='Admin').exists():
-    User.objects.create_superuser('Admin', 'Admin@gmail.com', '12345678')
+if not User.objects.filter(username="Admin").exists():
+    User.objects.create_superuser("Admin", "Admin@gmail.com", "12345678")
 
 # Crear 20 usuarios
 users = []
 for i in range(1, 21):
-    username = f'user{i}'
-    email = f'user{i}@example.com'
-    password = 'password'
+    username = f"user{i}"
+    email = f"user{i}@example.com"
+    password = "password"
     user = User.objects.create_user(username=username, email=email, password=password)
     users.append(user)
 
@@ -33,7 +37,7 @@ for i in range(1, 21):
 posts = []
 for i in range(1, 21):
     user = random.choice(users)
-    content = f'This is post number {i} by {user.username}'
+    content = f"This is post number {i} by {user.username}"
     post = Post.objects.create(user=user, content=content)
     posts.append(post)
 
@@ -42,7 +46,7 @@ for i in range(200):
     user = random.choice(users)
     post = random.choice(posts)
     post.likes.add(user)
-    print(f'{user.username} liked post {post.id}')
+    print(f"{user.username} liked post {post.id}")
 
 # Hacer que los usuarios se sigan entre sí aleatoriamente
 for user in users:

@@ -1,5 +1,10 @@
+"""Network app configuration."""
+
+# pylint: skip-file
 from django.apps import AppConfig
 
 
 class NetworkConfig(AppConfig):
-    name = 'network'
+    """Network app configuration."""
+
+    name = "network"

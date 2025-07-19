@@ -7,18 +7,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('network', '0001_initial'),
+        ("network", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='followers',
-            field=models.ManyToManyField(related_name='follows', to=settings.AUTH_USER_MODEL),
+            model_name="user",
+            name="followers",
+            field=models.ManyToManyField(
+                related_name="follows", to=settings.AUTH_USER_MODEL
+            ),
         ),
         migrations.AddField(
-            model_name='user',
-            name='following',
-            field=models.ManyToManyField(related_name='follow', to=settings.AUTH_USER_MODEL),
+            model_name="user",
+            name="following",
+            field=models.ManyToManyField(
+                related_name="follow", to=settings.AUTH_USER_MODEL
+            ),
         ),
     ]

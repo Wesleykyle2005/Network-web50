@@ -1,3 +1,3 @@
-from django.test import TestCase
+"""Tests for the Network app."""
 
-# Create your tests here.
+# pylint: skip-file
