@@ -1,5 +1,7 @@
 # 🌐 Network
 
+> 🗪 README.md en español: [README_ES.md](README_ES.md)
+
 **Network** is a web application developed as part of the *CS50’s Web Programming with Python and JavaScript* (Harvard) project. Its goal is to replicate the essential functionalities of a social network like *Threads*, allowing users to post content, follow others, and interact with posts in real-time.
 
 ## 📸 Screenshots
