@@ -1,8 +1,8 @@
 # 🌐 Network
 
-**Network** es una aplicación web desarrollada como parte del proyecto *CS50’s Web Programming with Python and JavaScript* (Harvard). Su objetivo es replicar las funcionalidades esenciales de una red social estilo *Threads*, permitiendo a los usuarios publicar contenido, seguir a otros, e interactuar con publicaciones en tiempo real.
+**Network** is a web application developed as part of the *CS50’s Web Programming with Python and JavaScript* (Harvard) project. Its goal is to replicate the essential functionalities of a social network like *Threads*, allowing users to post content, follow others, and interact with posts in real-time.
 
-## 📸 Capturas de pantalla
+## 📸 Screenshots
 
 - **All Posts**
   
@@ -16,103 +16,103 @@
   
   ![My Profile](network/static/network/images/my_profile.png)
 
-## 🚀 Funcionalidades Principales
+## 🚀 Main Features
 
-- Registro, inicio y cierre de sesión de usuarios
-- Creación, edición y eliminación de publicaciones
-- Sistema de seguidores (seguir/dejar de seguir usuarios)
-- Reacciones: dar y quitar "me gusta" a publicaciones
-- Paginación en todas las vistas de publicaciones
-- Perfil de usuario con métricas de seguidores y seguidos
-- Feed personalizado con publicaciones de usuarios seguidos
-- Interacciones asincrónicas (AJAX) para "likes", "follows" y edición de publicaciones
+- User registration, login, and logout
+- Creation, editing, and deletion of posts
+- Follower system (follow/unfollow users)
+- Reactions: like and unlike posts
+- Pagination in all post views
+- User profile with follower and following metrics
+- Personalized feed with posts from followed users
+- Asynchronous interactions (AJAX) for likes, follows, and post editing
 
-## 💻 Interfaz de Usuario
+## 💻 User Interface
 
-- Diseño minimalista y profesional
-- Paleta en tonos azules con acentos cian
-- Inspirado en editores modernos (VSCode, JetBrains)
-- Tipografía monoespaciada para una estética técnica
-- Alto contraste y legibilidad optimizada
+- Minimalist and professional design
+- Blue-toned color palette with cyan accents
+- Inspired by modern editors (VSCode, JetBrains)
+- Monospaced typography for a technical aesthetic
+- High contrast and optimized readability
 
-## 🛠️ Tecnologías Utilizadas
+## 🛠️ Technologies Used
 
 - **Backend**: Python 3, Django 5
 - **Frontend**: HTML5, CSS3, JavaScript (AJAX)
-- **Estilos**: Bootstrap 5 (utilidades y sistema de grillas)
+- **Styles**: Bootstrap 5 (utilities and grid system)
 
-## 📁 Estructura del Proyecto
+## 📁 Project Structure
 
-### Archivos Principales
+### Main Files
 
-- **`manage.py`**: Script de administración de Django para ejecutar comandos como migraciones, servidor de desarrollo, etc.
-- **`requirements.txt`**: Lista de dependencias de Python necesarias para el proyecto
-- **`insertions.py`**: Script para poblar la base de datos con datos de prueba (usuarios, posts, likes, seguidores)
-- **`db.sqlite3`**: Base de datos SQLite con todos los datos de la aplicación
+- **`manage.py`**: Django administration script for running commands like migrations, development server, etc.
+- **`requirements.txt`**: List of Python dependencies required for the project
+- **`insertions.py`**: Script to populate the database with test data (users, posts, likes, followers)
+- **`db.sqlite3`**: SQLite database with all application data
 
-### Directorio `network/` (Aplicación Principal)
+### Directory `network/` (Main Application)
 
-- **`models.py`**: Define los modelos de datos (User y Post) con sus relaciones y métodos
-- **`views.py`**: Contiene todas las vistas de la aplicación (páginas y endpoints AJAX)
-- **`urls.py`**: Configuración de rutas URL de la aplicación
-- **`admin.py`**: Configuración del panel de administración de Django
-- **`tests.py`**: Pruebas unitarias de la aplicación
+- **`models.py`**: Defines data models (User and Post) with their relationships and methods
+- **`views.py`**: Contains all application views (pages and AJAX endpoints)
+- **`urls.py`**: URL routing configuration for the application
+- **`admin.py`**: Django admin panel configuration
+- **`tests.py`**: Unit tests for the application
 
-### Directorio `network/static/network/`
+### Directory `network/static/network/`
 
-- **`styles.css`**: Estilos CSS personalizados con diseño minimalista y profesional
-- **`script.js`**: JavaScript para interacciones AJAX (likes, follows, edición de posts)
-- **`images/`**: Capturas de pantalla de la aplicación para la documentación
+- **`styles.css`**: Custom CSS styles with minimalist and professional design
+- **`script.js`**: JavaScript for AJAX interactions (likes, follows, post editing)
+- **`images/`**: Application screenshots for documentation
 
-### Directorio `network/templates/network/`
+### Directory `network/templates/network/`
 
-- **`layout.html`**: Plantilla base con estructura HTML común y navegación
-- **`index.html`**: Página principal con todas las publicaciones
-- **`following.html`**: Feed de publicaciones de usuarios seguidos
-- **`viewprofile.html`**: Perfil de usuario con métricas y publicaciones
-- **`login.html`**: Formulario de inicio de sesión
-- **`register.html`**: Formulario de registro de usuarios
+- **`layout.html`**: Base template with common HTML structure and navigation
+- **`index.html`**: Main page with all posts
+- **`following.html`**: Feed of posts from followed users
+- **`viewprofile.html`**: User profile with metrics and posts
+- **`login.html`**: Login form
+- **`register.html`**: User registration form
 
-### Directorio `project4/` (Configuración del Proyecto)
+### Directory `project4/` (Project Configuration)
 
-- **`settings.py`**: Configuración principal de Django (base de datos, aplicaciones, middleware, etc.)
-- **`urls.py`**: Configuración de rutas URL principales del proyecto
-- **`wsgi.py`**: Configuración para despliegue en producción
-- **`asgi.py`**: Configuración para aplicaciones asíncronas
+- **`settings.py`**: Main Django configuration (database, apps, middleware, etc.)
+- **`urls.py`**: Main project URL routing configuration
+- **`wsgi.py`**: Configuration for production deployment
+- **`asgi.py`**: Configuration for asynchronous applications
 
-### Directorio `network/migrations/`
+### Directory `network/migrations/`
 
-Contiene los archivos de migración de la base de datos que definen la evolución del esquema de datos.
+Contains database migration files that define the evolution of the data schema.
 
-## ⚡ Instalación Rápida
+## ⚡ Quick Installation
 
-1. Clona el repositorio:
+1. Clone the repository:
    ```bash
    git clone https://github.com/Wesleykyle2005/Network-web50
    cd network
    ```
 
-2. Instala las dependencias:
+2. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. Aplica las migraciones:
+3. Apply migrations:
    ```bash
    python manage.py makemigrations
    python manage.py migrate
    ```
 
-4. (Opcional) Poblado de la base de datos para pruebas:
+4. (Optional) Populate the database for testing:
    ```bash
    python insertions.py
    ```
-   Esto creará usuarios, posts, likes y relaciones de seguimiento aleatorias para pruebas y demostración.
+   This will create users, posts, likes, and random follow relationships for testing and demonstration.
 
-5. Inicia el servidor de desarrollo:
+5. Start the development server:
    ```bash
    python manage.py runserver
    ```
 
-6. Accede a la aplicación desde tu navegador en:
+6. Access the application from your browser at:
    [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
