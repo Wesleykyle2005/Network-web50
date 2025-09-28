@@ -1,5 +1,3 @@
-Traducelo este readme a inglés al pie de la letra, sin cambio alguno
-
 # 🌐 Network
 
 **Network** es una aplicación web desarrollada como parte del proyecto *CS50’s Web Programming with Python and JavaScript* (Harvard). Su objetivo es replicar las funcionalidades esenciales de una red social estilo *Threads*, permitiendo a los usuarios publicar contenido, seguir a otros, e interactuar con publicaciones en tiempo real.
